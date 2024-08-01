@@ -1,0 +1,10 @@
+__pycache__
+.venv
+
+# Model stuff
+vosk-model-small-en-us-0.15.zip
+vosk-model-small-en-us-0.15
+
+# Database stuff
+audio_recordings
+recordings.db
