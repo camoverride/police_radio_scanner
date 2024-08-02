@@ -1,0 +1,15 @@
+[Unit]
+Description=audio streaming
+After=default.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/home/pi/police_radio_scanner
+ExecStart=/home/pi/police_radio_scanner/.venv/bin/python /home/pi/police_radio_scanner/stream_radio.py
+StandardOutput=journal
+StandardError=journal
+Environment="PATH=/home/pi/police_radio_scanner/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=default.target

@@ -43,8 +43,6 @@ Start it on boot: `sudo loginctl enable-linger pi`
 
 Get the logs: `journalctl --user -u police_radio_scanner.service`
 
-
-
 NOTE: takes about 71 seconds to record/transcribe 60 seconds of audio on RPi 4.
 
 
