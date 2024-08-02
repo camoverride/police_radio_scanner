@@ -25,6 +25,13 @@ Create location for db files:
 - `python stream_radio.py`
 
 
+## Inspect Database
+
+- `sudo apt install sqlite3`
+- `sqlite3 recordings.db`
+- `SELECT * FROM recordings LIMIT 10;`
+
+
 ## TODO:
 
 - add a front-end that performs analysis on all the words we collect. However, first get a database!
