@@ -27,6 +27,7 @@ Create location for db files:
 
 - add a front-end that performs analysis on all the words we collect. However, first get a database!
 - then pass over this database to get corrections + summaries
+- auto-start program
 
 - try bigger model
 - analysis of words (get lots of recordings first)
