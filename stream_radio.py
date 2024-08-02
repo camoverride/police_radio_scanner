@@ -1,3 +1,5 @@
+#!/home/pi/police_radio_scanner/.venv/bin/python
+
 from datetime import datetime
 import os
 import subprocess

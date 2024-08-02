@@ -9,7 +9,7 @@ Type=simple
 User=pi
 Restart=always
 WorkingDirectory=/home/pi/police_radio_scanner
-ExecStart=sudo /home/pi/police_radio_scanner/.venv/bin/python /home/pi/police_radio_scanner/stream_radio.py
+ExecStart=/home/pi/police_radio_scanner/.venv/bin/python /home/pi/police_radio_scanner/stream_radio.py
 
 [Install]
 WantedBy=multi-user.target
