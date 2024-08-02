@@ -1,4 +1,4 @@
-# Radio Scanner
+# Police Radio Scanner
 
 ## Setup
 
@@ -22,7 +22,24 @@ Create location for db files:
 
 ## Run
 
-- `python stream_radio.py`
+Test:
+- `nohup python stream_radio.py &`
+
+Production mode:
+
+Start a service with *systemd*. This will start the program when the computer starts and revive it when it dies. Copy the contents of `police_radio_stream.service` to `/etc/systemd/system/police_radio_stream.service` (via `sudo vim /etc/systemd/system/police_radio_stream.service`).
+
+Start the service using the commands below.
+
+- `sudo systemctl daemon-reload`
+- Start it on boot: `sudo systemctl enable police_radio_stream.service` 
+- Start it right now: `sudo systemctl start police_radio_stream.service`
+- Stop it right now: `sudo systemctl stop police_radio_stream.service`
+- Get logs: `sudo journalctl -u police_radio_stream | tail`
+
+
+
+NOTE: takes about 71 seconds to record/transcribe 60 seconds of audio on RPi 4.
 
 
 ## Inspect Database
