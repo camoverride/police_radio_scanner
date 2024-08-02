@@ -27,15 +27,21 @@ Test:
 
 Production mode:
 
-Start a service with *systemd*. This will start the program when the computer starts and revive it when it dies. Copy the contents of `police_radio_stream.service` to `/etc/systemd/system/police_radio_stream.service` (via `sudo vim /etc/systemd/system/police_radio_stream.service`).
+Start a service with *systemd*. This will start the program when the computer starts and revive it when it dies
+
+- `mkdir -p ~/.config/systemd/user`
+- `~/.config/systemd/user/police_radio_scanner.service`
+- paste in the contents of `police_radio_scanner.service`
 
 Start the service using the commands below.
 
-- `sudo systemctl daemon-reload`
-- Start it on boot: `sudo systemctl enable police_radio_stream.service` 
-- Start it right now: `sudo systemctl start police_radio_stream.service`
-- Stop it right now: `sudo systemctl stop police_radio_stream.service`
-- Get logs: `sudo journalctl -u police_radio_stream | tail`
+- `systemctl --user daemon-reload`
+- `systemctl --user enable police_radio_scanner.service`
+- `systemctl --user start police_radio_scanner.service`
+
+Start it on boot: `sudo loginctl enable-linger pi`
+
+Get the logs: `journalctl --user -u police_radio_scanner.service`
 
 
 
