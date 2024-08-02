@@ -5,11 +5,13 @@
 Python dependencies (python 3.9.6):
 - `python -m venv .venv`
 - `source .venv/bin/activate`
+- `sudo apt-get update`
+- `sudo apt-get install libasound2-dev`
 - `pip install -r requirements.txt`
 
 Download Vosk model:
-- `wget https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15`
-- `unzip vosk-model-small-en-us-0.15`
+- `wget https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip`
+- `unzip vosk-model-small-en-us-0.15.zip`
 
 Create database:
 - `python create_db.py`
