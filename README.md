@@ -32,6 +32,12 @@ Create location for db files:
 - `SELECT * FROM recordings LIMIT 10;`
 
 
+## Settings
+
+Adjust volume:
+- `alsamixer`
+
+
 ## TODO:
 
 - add a front-end that performs analysis on all the words we collect. However, first get a database!
