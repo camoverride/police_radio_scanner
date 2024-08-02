@@ -24,7 +24,12 @@ Create location for db files:
 
 
 ## TODO:
+
+- add a front-end that performs analysis on all the words we collect. However, first get a database!
+- then pass over this database to get corrections + summaries
+
 - try bigger model
 - analysis of words (get lots of recordings first)
 - filter out ads
 - benchmark on pi
+- https://www.broadcastify.com/listen/mid/25
