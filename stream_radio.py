@@ -10,8 +10,9 @@ import threading
 import simpleaudio as sa
 from vosk import Model, KaldiRecognizer, SetLogLevel
 import time
-from database_utils import create_connection, add_recording_to_db
 
+from database_utils import create_connection, add_recording_to_db
+from summarization import get_summary
 
 
 # Set the environment variable to suppress Vosk logs
@@ -114,13 +115,6 @@ def play_audio_file_async(file_path):
     # Create and start the thread
     thread = threading.Thread(target=audio_thread)
     thread.start()
-
-
-def get_summary(text):
-    """
-    Summarizes some text.
-    """
-    return "dummy summary!"
 
 
 def record_and_summarize(audio_stream_url : str,
