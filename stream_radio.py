@@ -10,7 +10,7 @@ import threading
 import simpleaudio as sa
 from vosk import Model, KaldiRecognizer, SetLogLevel
 import time
-from create_db import create_connection, add_recording_to_db
+from database_utils import create_connection, add_recording_to_db
 
 
 
@@ -117,7 +117,10 @@ def play_audio_file_async(file_path):
 
 
 def get_summary(text):
-    pass
+    """
+    Summarizes some text.
+    """
+    return "dummy summary!"
 
 
 def record_and_summarize(audio_stream_url : str,
@@ -163,7 +166,6 @@ def record_and_summarize(audio_stream_url : str,
     print(f"   Summarizing ...")
     summary = get_summary(transcription)
     print(summary)
-
 
     # Insert this information info the database
     print(f"   Inserting into database ...")
