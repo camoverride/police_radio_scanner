@@ -158,20 +158,19 @@ def record_and_summarize(audio_stream_url : str,
     summary = get_summary(transcription)
     print(summary)
 
-    # Insert this information info the database
-    print(f"   Inserting into database ...")
-    add_recording_to_db(conn=database_conn,
-                        filename=audio_file_path,
-                        transcription=transcription,
-                        summary=summary)
-    
-    # Get the date for file naming
-    s3_file_name = f"police_audio_{start_time.strftime('%Y-%m-%d_%H:%M:%S.%f')[:-3]}.wav"
-
     # Upload the file to S3
+    s3_file_name = f"police_audio_{start_time.strftime('%Y-%m-%d_%H:%M:%S.%f')[:-3]}.wav"
     s3_file_path = upload_file_to_s3(path_to_file=audio_file_path,
                                      file_name=s3_file_name,
                                      bucket="police-radio-data")
+    print(f"   Uploading {s3_file_path}")
+
+    # Insert this information info the database
+    print(f"   Inserting into database ...")
+    add_recording_to_db(conn=database_conn,
+                        filename=s3_file_path,
+                        transcription=transcription,
+                        summary=summary)
 
     # Play audio
     # print(f"   Playing: {audio_file_path}")
