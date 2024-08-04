@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Player</title>
+    <title>SPD Summarizer</title>
 </head>
 <body>
+    <p class="description">What's SPD talking about?</p>
     <audio id="audio-player" controls autoplay>
         Your browser does not support the audio element.
     </audio>
@@ -16,21 +17,21 @@
     <script>
         const audioPlayer = document.getElementById('audio-player');
         const summaryElement = document.querySelector('.summary');
-
+    
         function fetchAudio() {
-            fetch('/get_audio')
+            fetch('http://localhost:8080/data') // Update this URL to match your RESTful API endpoint
                 .then(response => response.json())
                 .then(data => {
-                    audioPlayer.src = data.audio_url;
+                    audioPlayer.src = data.path_to_audio_file; // Use the correct key for the audio URL
                     audioPlayer.play(); // Play the new audio file automatically // disabled on most browsers
-                    summaryElement.textContent = data.summary;
+                    summaryElement.textContent = data.summary; // Update the summary text
                 })
                 .catch(error => console.error('Error fetching audio URL:', error));
         }
-
+    
         // Fetch and play an audio file when the page loads
         fetchAudio();
-
+    
         // Fetch a new audio file when the current audio finishes playing
         audioPlayer.addEventListener('ended', fetchAudio);
     </script>
