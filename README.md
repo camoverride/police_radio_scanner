@@ -14,12 +14,15 @@ Python dependencies (python 3.9.6):
 - `sudo apt-get install libasound2-dev`
 - `pip install -r requirements.txt`
 
+FFMPEG:
+- `sudo apt-get install ffmpeg`
+
 Download Vosk model:
 - `wget https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip`
 - `unzip vosk-model-small-en-us-0.15.zip`
 
 Create database:
-- `python create_db.py`
+- `python databse_utils.py`
 
 Create location for db files:
 - `mkdir audio_recordings`

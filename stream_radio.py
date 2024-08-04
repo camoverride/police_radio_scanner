@@ -95,26 +95,26 @@ def perform_asr_on_file(audio_file, model_path="vosk-model-small-en-us-0.15"):
 #     play_obj.wait_done()
 
 
-def play_audio_file_async(file_path):
-    """
-    Plays an audio file using simpleaudio in a separate thread.
+# def play_audio_file_async(file_path):
+#     """
+#     Plays an audio file using simpleaudio in a separate thread.
 
-    Args:
-        file_path (str): The path to the audio file.
-    """
-    def audio_thread():
-        # Load the audio file
-        wave_obj = sa.WaveObject.from_wave_file(file_path)
+#     Args:
+#         file_path (str): The path to the audio file.
+#     """
+#     def audio_thread():
+#         # Load the audio file
+#         wave_obj = sa.WaveObject.from_wave_file(file_path)
         
-        # Play the audio file
-        play_obj = wave_obj.play()
+#         # Play the audio file
+#         play_obj = wave_obj.play()
         
-        # Wait for the playback to finish
-        play_obj.wait_done()
+#         # Wait for the playback to finish
+#         play_obj.wait_done()
 
-    # Create and start the thread
-    thread = threading.Thread(target=audio_thread)
-    thread.start()
+#     # Create and start the thread
+#     thread = threading.Thread(target=audio_thread)
+#     thread.start()
 
 
 def record_and_summarize(audio_stream_url : str,

@@ -66,7 +66,7 @@ termcolor==2.4.0
 tf_keras==2.17.0
 tokenizers==0.19.1
 tqdm==4.66.4
-transformers==4.43.3
+# transformers==4.43.3
 typing_extensions==4.12.2
 urllib3==1.26.19
 vosk==0.3.44
