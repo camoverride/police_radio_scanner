@@ -3,18 +3,10 @@ from datetime import datetime
 
 
 
-def create_connection(db_file):
-    """ Create a database connection to a SQLite database """
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-    except sqlite3.Error as e:
-        print(e)
-    return conn
-
-
 def create_table(conn):
-    """ Create a table in the SQLite database """
+    """
+    Create a table in the SQLite database
+    """
     try:
         c = conn.cursor()
         c.execute('''
@@ -22,7 +14,8 @@ def create_table(conn):
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 date DATETIME NOT NULL,
                 filename TEXT NOT NULL,
-                transcription TEXT NOT NULL
+                transcription TEXT NOT NULL,
+                summary TEXT NOT NULL
             );
         ''')
         print("Table created successfully")
@@ -30,38 +23,47 @@ def create_table(conn):
         print(e)
 
 
-def add_recording_to_db(conn, filename, transcription):
-    """ Add a new recording to the table """
+def add_recording_to_db(conn, filename, transcription, summary):
+    """
+    Add a new recording to the table
+    """
     try:
         c = conn.cursor()
         # Automatically uses the current datetime for the date field
         current_datetime = datetime.now()
         c.execute('''
-            INSERT INTO recordings (date, filename, transcription)
-            VALUES (?, ?, ?);
-        ''', (current_datetime, filename, transcription))
+            INSERT INTO recordings (date, filename, transcription, summary)
+            VALUES (?, ?, ?, ?);
+        ''', (current_datetime, filename, transcription, summary))
         conn.commit()
     except sqlite3.Error as e:
         print(e)
 
 
-def main():
+def create_connection(database):
+    """
+    Connect to a database.
+    """
+    conn = sqlite3.connect(database)
+
+    return conn
+
+
+if __name__ == "__main__":
+
     database = "recordings.db"
 
-    # create a database connection
+    # Connect to the database
     conn = create_connection(database)
 
-    # create tables
+    # Create the tables
     if conn is not None:
         create_table(conn)
 
         # Example usage: add a new recording
-        add_recording_to_db(conn, "example.wav", "This is a sample transcription of the audio file.")
-        
+        # add_recording_to_db(conn, "example.wav", "This is a sample transcription of the audio file.", "a summary!")
+
         # close the connection
         conn.close()
     else:
         print("Error! cannot create the database connection.")
-
-if __name__ == '__main__':
-    main()

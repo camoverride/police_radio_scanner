@@ -1,5 +1,10 @@
 # Police Radio Scanner
 
+What are the cops up to tonight?
+
+Real-time analysis of police radio conversations in Seattle.
+
+
 ## Setup
 
 Python dependencies (python 3.9.6):
@@ -19,12 +24,25 @@ Create database:
 Create location for db files:
 - `mkdir audio_recordings`
 
+Export credentials for S3 and OpenAI API:
+- `export AWS_ACCESS_KEY_ID= access key`
+- `export AWS_SECRET_ACCESS_KEY= secret key`
+- `export AWS_DEFAULT_REGION=us-west-2`
+- `export OPENAI_API_KEY= open ai key`
+
 
 ## Run
 
 Test:
-- `nohup python stream_radio.py &`
+- `python stream_radio.py`
+- `python app.py`
 
+
+
+
+
+
+<!-- 
 Production mode:
 
 Start a service with *systemd*. This will start the program when the computer starts and revive it when it dies
@@ -43,7 +61,7 @@ Start it on boot: `sudo loginctl enable-linger pi`
 
 Get the logs: `journalctl --user -u police_radio_scanner.service`
 
-NOTE: takes about 71 seconds to record/transcribe 60 seconds of audio on RPi 4.
+NOTE: takes about 71 seconds to record/transcribe 60 seconds of audio on RPi 4. -->
 
 
 ## Inspect Database

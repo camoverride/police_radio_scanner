@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player</title>
+</head>
+<body>
+    <h1>Audio Player</h1>
+    <audio id="audio-player" controls autoplay>
+        Your browser does not support the audio element.
+    </audio>
+    <p class="summary">
+        This is where the summary goes -- you should never see this text.
+    </p>
+
+    <script>
+        const audioPlayer = document.getElementById('audio-player');
+        const summaryElement = document.querySelector('.summary');
+
+        function fetchAudio() {
+            fetch('/get_audio')
+                .then(response => response.json())
+                .then(data => {
+                    audioPlayer.src = data.audio_url;
+                    audioPlayer.play(); // Play the new audio file automatically // disabled on most browsers
+                    summaryElement.textContent = data.summary;
+                })
+                .catch(error => console.error('Error fetching audio URL:', error));
+        }
+
+        // Fetch and play an audio file when the page loads
+        fetchAudio();
+
+        // Fetch a new audio file when the current audio finishes playing
+        audioPlayer.addEventListener('ended', fetchAudio);
+    </script>
+</body>
+</html>
