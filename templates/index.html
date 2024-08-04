@@ -19,7 +19,7 @@
         const summaryElement = document.querySelector('.summary');
     
         function fetchAudio() {
-            fetch('http://localhost:8080/data') // Update this URL to match your RESTful API endpoint
+            fetch('http://35.91.85.19:8080/data') // Update this URL to match your RESTful API endpoint
                 .then(response => response.json())
                 .then(data => {
                     audioPlayer.src = data.path_to_audio_file; // Use the correct key for the audio URL
