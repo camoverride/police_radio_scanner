@@ -23,4 +23,4 @@ api.add_resource(DataResource, "/data")
 
 if __name__ == "__main__":
     # Start the restful API, listening on all interfaces
-    restful_server.run(host="0.0.0.0", debug=True)
+    restful_server.run(debug=True)
