@@ -8,3 +8,6 @@ vosk-model-small-en-us-0.15
 # Database stuff
 audio_recordings
 recordings.db
+
+# Misc
+__tmp_audio.wav

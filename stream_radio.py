@@ -13,7 +13,7 @@ import time
 
 from database_utils import create_connection, add_recording_to_db
 from summarization import get_summary
-
+from aws_utils import upload_file_to_s3
 
 # Set the environment variable to suppress Vosk logs
 SetLogLevel(-1)
@@ -119,7 +119,6 @@ def play_audio_file_async(file_path):
 
 def record_and_summarize(audio_stream_url : str,
                              recording_duration : int,
-                             audio_save_dir : str,
                              database_conn : str,
                              ) -> dict:
     """
@@ -131,24 +130,22 @@ def record_and_summarize(audio_stream_url : str,
         {
             "path_to_audio_file": "www.audio.com/file_1.wav",
             "transcription": "We are some people talking, this is our conversation."
+            "summary": "People talked."
         }
     """
     # Recording start time
     start_time = datetime.now()
     print(start_time)
 
-    # Get the date for file naming
-    date_string = start_time.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-
     # Get the path to the audio file
-    audio_file_path = os.path.join(audio_save_dir, f"audio_{date_string}.wav")
+    audio_file_path = "__tmp_audio.wav" # os.path.join(audio_save_dir, f"audio_{date_string}.wav")
 
     # Record audio
     print(f"   Recording ...")
     # TODO: output data instead of path
     record_audio_from_url(url=audio_stream_url,
-                            num_secs=recording_duration,
-                            output_file=audio_file_path)
+                          num_secs=recording_duration,
+                          output_file=audio_file_path)
 
     # Get transcription
     print(f"   Transcribing ...")
@@ -167,21 +164,29 @@ def record_and_summarize(audio_stream_url : str,
                         filename=audio_file_path,
                         transcription=transcription,
                         summary=summary)
+    
+    # Get the date for file naming
+    s3_file_name = f"police_audio_{start_time.strftime('%Y-%m-%d_%H:%M:%S.%f')[:-3]}.wav"
 
+    # Upload the file to S3
+    s3_file_path = upload_file_to_s3(path_to_file=audio_file_path,
+                                     file_name=s3_file_name,
+                                     bucket="police-radio-data")
+
+    # Play audio
+    # print(f"   Playing: {audio_file_path}")
+    # play_audio_file_async(audio_file_path)
+    # print("--------------------")
+
+    # Return a dict
+    data = {"path_to_audio_file": s3_file_path,
+            "transcription": transcription,
+            "summary": summary}
+    
     # `recording_length` seconds must have elapsed betwee the beginning of the recording and
     # when it gets played. Pause until `recording_length` secs have elapsed.
     while (datetime.now() - start_time).total_seconds() < recording_duration:
         time.sleep(0.1)
-
-    # Play audio
-    print(f"   Playing: {audio_file_path}")
-    play_audio_file_async(audio_file_path)
-    print("--------------------")
-
-    # Return a dict
-    data = {"path_to_audio_file": audio_file_path,
-            "transcription": transcription,
-            "summary": summary}
 
     return data
 
@@ -195,12 +200,15 @@ if __name__ == "__main__":
 
     while True:
         results = record_and_summarize(audio_stream_url="https://broadcastify.cdnstream1.com/31423",
-                             recording_duration=10, # 300s = 5min chunk to reduce calls to API 
-                             audio_save_dir="audio_recordings",
+                             recording_duration=60, # 300s = 5min chunk to reduce calls to API 
                              database_conn=conn)
 
-        # print("000000000000000")
-        # print(results["path_to_audio_file"])
-        # print(results["transcription"])
-        # print(results["summary"])
-        # print("000000000000000")
+        # Write the s3 path to info.txt
+        print("   Writing to `data.json`")
+        print("-------------------------------------------")
+
+        # TODO: write to a json instead!
+        # Write to a JSON file
+        with open("data.json", "w") as json_file:
+            json.dump(results, json_file, indent=4)
+

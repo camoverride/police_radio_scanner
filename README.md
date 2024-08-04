@@ -1,5 +1,10 @@
 # Police Radio Scanner
 
+What are the cops up to tonight?
+
+Real-time analysis of police radio conversations in Seattle.
+
+
 ## Setup
 
 Python dependencies (python 3.9.6):
