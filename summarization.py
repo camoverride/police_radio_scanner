@@ -4,7 +4,7 @@ from openai import OpenAI
 
 
 
-client = OpenAI(api_key = os.getenv("OPENAI_API_KEY"),)
+# client = OpenAI(api_key = os.getenv("OPENAI_API_KEY"),)
 
 PROMPT = """
 The following is the transcription of a police radio conversation. The conversation was recorded on a noisy radio, which means the transcription will have inaccuracies. For instance, the word "copy" is often incorrectly transcribed as "coffee." Additionally, words or phrases that occur at the beginning or end of the transcription might be clipped, as this is where the recording began or ended. Also, there are ads inserted into the conversations. If you see an add, don't describe it, simply write "NOW FOR A COMMERCIAL BREAK!"
