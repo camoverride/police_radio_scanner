@@ -7,7 +7,7 @@ import wave
 import json
 import subprocess
 import threading
-import simpleaudio as sa
+# import simpleaudio as sa
 from vosk import Model, KaldiRecognizer, SetLogLevel
 import time
 
@@ -78,21 +78,21 @@ def perform_asr_on_file(audio_file, model_path="vosk-model-small-en-us-0.15"):
     return result_text.strip()
 
 
-def play_audio_file(file_path):
-    """
-    Plays an audio file using simpleaudio.
+# def play_audio_file(file_path):
+#     """
+#     Plays an audio file using simpleaudio.
 
-    Args:
-        file_path (str): The path to the audio file.
-    """
-    # Load the audio file
-    wave_obj = sa.WaveObject.from_wave_file(file_path)
+#     Args:
+#         file_path (str): The path to the audio file.
+#     """
+#     # Load the audio file
+#     wave_obj = sa.WaveObject.from_wave_file(file_path)
     
-    # Play the audio file
-    play_obj = wave_obj.play()
+#     # Play the audio file
+#     play_obj = wave_obj.play()
     
-    # Wait for the playback to finish before exiting
-    play_obj.wait_done()
+#     # Wait for the playback to finish before exiting
+#     play_obj.wait_done()
 
 
 def play_audio_file_async(file_path):
