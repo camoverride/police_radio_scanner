@@ -1,13 +1,10 @@
 #!/home/pi/police_radio_scanner/.venv/bin/python
 
 from datetime import datetime
-import os
 import subprocess
 import wave
 import json
 import subprocess
-import threading
-# import simpleaudio as sa
 from vosk import Model, KaldiRecognizer, SetLogLevel
 import time
 
@@ -78,45 +75,6 @@ def perform_asr_on_file(audio_file, model_path="vosk-model-small-en-us-0.15"):
     return result_text.strip()
 
 
-# def play_audio_file(file_path):
-#     """
-#     Plays an audio file using simpleaudio.
-
-#     Args:
-#         file_path (str): The path to the audio file.
-#     """
-#     # Load the audio file
-#     wave_obj = sa.WaveObject.from_wave_file(file_path)
-    
-#     # Play the audio file
-#     play_obj = wave_obj.play()
-    
-#     # Wait for the playback to finish before exiting
-#     play_obj.wait_done()
-
-
-# def play_audio_file_async(file_path):
-#     """
-#     Plays an audio file using simpleaudio in a separate thread.
-
-#     Args:
-#         file_path (str): The path to the audio file.
-#     """
-#     def audio_thread():
-#         # Load the audio file
-#         wave_obj = sa.WaveObject.from_wave_file(file_path)
-        
-#         # Play the audio file
-#         play_obj = wave_obj.play()
-        
-#         # Wait for the playback to finish
-#         play_obj.wait_done()
-
-#     # Create and start the thread
-#     thread = threading.Thread(target=audio_thread)
-#     thread.start()
-
-
 def record_and_summarize(audio_stream_url : str,
                              recording_duration : int,
                              database_conn : str,
@@ -171,11 +129,6 @@ def record_and_summarize(audio_stream_url : str,
                         filename=s3_file_path,
                         transcription=transcription,
                         summary=summary)
-
-    # Play audio
-    # print(f"   Playing: {audio_file_path}")
-    # play_audio_file_async(audio_file_path)
-    # print("--------------------")
 
     # Return a dict
     data = {"path_to_audio_file": s3_file_path,
