@@ -24,9 +24,6 @@ Download Vosk model:
 Create database:
 - `python databse_utils.py`
 
-Create location for db files:
-- `mkdir audio_recordings`
-
 Export credentials for S3 and OpenAI API:
 - `export AWS_ACCESS_KEY_ID= access key`
 - `export AWS_SECRET_ACCESS_KEY= secret key`
@@ -36,9 +33,13 @@ Export credentials for S3 and OpenAI API:
 
 ## Run
 
-Test:
-- `python stream_radio.py`
-- `python app.py`
+Start the restful API, which will return data to the front-end:
+- `nohup python restful_api.py &`
+
+Start `stream_radio.py`, containing the function `record_and_summarize`, which is responsible for many tasks: recording audio, saving it to s3, getting the transcription/summary, updating the recordings database, and updating `data.json`, which contains the most recent database entry.
+- `nohup python stream_radio.py &`
+
+
 
 
 

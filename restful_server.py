@@ -22,9 +22,5 @@ api.add_resource(DataResource, "/data")
 
 
 if __name__ == "__main__":
-
-    # Start the restful API
-    restful_server.run(debug=True, port=8080)
-
-    # Test it out
-    # curl http://127.0.0.1:8080/data
+    # Start the restful API, listening on all interfaces
+    restful_server.run(host="0.0.0.0", debug=True)
