@@ -34,7 +34,8 @@ def get_summary(data):
                 "content": f"{PROMPT_PREFIX}\n\n {data}",
             }
         ],
-        model="gpt-3.5-turbo",
+        # model="gpt-3.5-turbo",
+        model="gpt-4",
     )
 
     return chat_completion.choices[0].message.content
