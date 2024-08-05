@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+.description {
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+}
+
+.summary {
+    font-family: 'OCR A Std', monospace;
+    color: white;
+}

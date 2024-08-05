@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPD Summarizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <p class="description">What's SPD talking about?</p>
+    <audio id="audio-player" controls autoplay>
+        Your browser does not support the audio element.
+    </audio>
+    <p class="summary">
+        This is where the summary goes -- you should never see this text.
+    </p>
+
+    <script>
+        const audioPlayer = document.getElementById("audio-player");
+        const summaryElement = document.querySelector(".summary");
+    
+        function fetchAudio() {
+            // Endpoint for the Restful API.
+            fetch("https://camsmith.xyz/data")
+
+                .then(response => response.json())
+                .then(data => {
+                    // Update the audio data.
+                    audioPlayer.src = data.path_to_audio_file;
+                    // Play the new audio.
+                    audioPlayer.play();
+                    // Update the summary text.
+                    summaryElement.textContent = data.summary;
+                })
+                .catch(error => console.error("Error fetching audio URL:", error));
+        }
+    
+        // Fetch and play an audio file when the page loads.
+        fetchAudio();
+    
+        // Fetch a new audio file when the current audio finishes playing.
+        audioPlayer.addEventListener("ended", fetchAudio);
+    </script>
+</body>
+</html>
+
