@@ -12,7 +12,7 @@ Summarize the following police conversation in short declarative sentences in th
 """
 
 PROMPT_PREFIX = """
-Summarize the following police conversation in short declarative sentences in the present tense. Keep in mind that this conversation was transcribed from a noise radio channel, meaning that there will be many mistakes in the transcription:
+Summarize the events from the following police conversation in short declarative sentences in the present tense. Keep in mind that this conversation was transcribed from a noise radio channel, meaning that there will be many mistakes in the transcription:
 """
 
 
