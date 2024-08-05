@@ -12,7 +12,7 @@ Summarize the following police conversation in short declarative sentences in th
 """
 
 PROMPT_PREFIX = """
-Briefly summarize the events from the following police radio transcription. Use very short declarative sentences only. Ignore unintelligible phrases. Only use confident language: 
+Briefly summarize the events from the following police radio transcription. Use very short declarative sentences only. Ignore unintelligible phrases. If there is nothing comprehensible to comment on, don't say anything at all: 
 """
 
 
