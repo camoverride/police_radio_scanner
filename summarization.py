@@ -4,8 +4,14 @@ from openai import OpenAI
 
 
 PROMPT_PREFIX = """
-Please summarize the following text. It is a transcription of a police radio conversation with several speakers. Topics unrelated to police acitivites are likely mistaken transcriptions. Use declarative sentences - ignore thee mistakes or try to make sense of them. Use the present tense. Try to use short sentences with periods. Use confident language. Pay close attention to the crimes and odd events. 
+Please summarize the following text. It is a transcription of a police radio conversation with several speakers. Topics unrelated to police acitivites are likely mistaken transcriptions. Use declarative sentences - ignore thee mistakes or try to make sense of them. Use the present tense. Try to use short sentences with periods. Use confident language. Pay close attention to the crimes and odd events:
 """
+
+PROMPT_PREFIX = """
+Summarize the following police conversation in short declarative sentences in the present tense. Ignore words or phrases that are too weird - they are likely transcription mistakes. Make your summary broken into very short sentences. Do not write anything too weird:
+"""
+
+
 
 
 def get_summary(data):
