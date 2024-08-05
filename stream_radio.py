@@ -135,10 +135,10 @@ def record_and_summarize(audio_stream_url : str,
             "transcription": transcription,
             "summary": summary}
     
-    # `recording_length` seconds must have elapsed betwee the beginning of the recording and
-    # when it gets played. Pause until `recording_length` secs have elapsed.
-    while (datetime.now() - start_time).total_seconds() < recording_duration:
-        time.sleep(0.1)
+    # # `recording_length` seconds must have elapsed betwee the beginning of the recording and
+    # # when it gets played. Pause until `recording_length` secs have elapsed.
+    # while (datetime.now() - start_time).total_seconds() < recording_duration:
+    #     time.sleep(0.1)
 
     return data
 
