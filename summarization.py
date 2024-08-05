@@ -1,39 +1,45 @@
-
 import os
 from openai import OpenAI
 
 
 
-# client = OpenAI(api_key = os.getenv("OPENAI_API_KEY"),)
-
-PROMPT = """
-The following is the transcription of a police radio conversation. The conversation was recorded on a noisy radio, which means the transcription will have inaccuracies. For instance, the word "copy" is often incorrectly transcribed as "coffee." Additionally, words or phrases that occur at the beginning or end of the transcription might be clipped, as this is where the recording began or ended. Also, there are ads inserted into the conversations. If you see an add, don't describe it, simply write "NOW FOR A COMMERCIAL BREAK!"
-
-I want you to summarize this conversation. Use declarative sentences. Do not express uncertainty. Use the present tense only. Be concise but accurate. Pay special attention to times, locations, and the identities of individuals. Try to identify any crimes or weird events that happened. If there is a violent or aggressive situation, make sure to describe it. Below is the police radio transcription:
-
-
+PROMPT_PREFIX = """
+Please summarize the following text. It is a transcription of a police radio conversation with several speakers. There will be transcription errors. Use declarative sentences. Use the present tense. Try to use short sentences with periods. Use confident language. Pay close attention to the crimes and odd events.
 """
 
 
-def get_summary(text):
+def get_summary(prompt_prefix, data):
     """
-    Summarizes some text.
+    Feeds the prompt_prefix (which describes the task) and the recordings data
+    to the OpenAI API to get a summarization.
     """
-    return text
-    completion = client.completions.create(
-        model = "gpt-3.5-turbo-instruct",
-        prompt = f"{PROMPT}: {text}",
-        max_tokens = 10,
-        temperature = 0
+
+    client = OpenAI(
+        # This is the default and can be omitted
+        api_key=os.environ.get("OPENAI_API_KEY"),
     )
 
-    return completion.choices[0].text.strip()
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": f"{prompt_prefix}\n\n {data}",
+            }
+        ],
+        model="gpt-3.5-turbo",
+    )
+
+    return chat_completion.choices[0].message.content
 
 
 
 if __name__ == "__main__":
-    dummy_convo = ""
 
-    response = get_summary(dummy_convo)
+    # Test API call
+    test_data = """
+    teaching and i can be contacted via farce vehicles registered address fishy    i'm a dispatch you enjoy myself taking to i'm taking  lg realize the dorling old army think as long as we're going on keys you can find out fault our funding for the are of park we we have to have your crew's coming here we have a couple are both need transport both are covered positive|teaching and i can be contacted via farce vehicles registered address fishy    i'm a dispatch you enjoy myself taking to i'm taking  lg realize the dorling old army think as long as we're going on keys you can find out fault our funding for the are of park we we have to have your crew's coming here we have a couple are both need transport both are covered positive
+    """
 
-    print(response)
+    summary = get_summary(PROMPT_PREFIX,test_data)
+
+    print(summary)
