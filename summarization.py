@@ -12,7 +12,7 @@ Summarize the following police conversation in short declarative sentences in th
 """
 
 PROMPT_PREFIX = """
-Summarize the events from the following: 
+Briefly summarize the events from the following: 
 """
 
 
