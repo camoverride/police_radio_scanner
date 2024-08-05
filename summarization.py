@@ -11,7 +11,9 @@ PROMPT_PREFIX = """
 Summarize the following police conversation in short declarative sentences in the present tense. Ignore words or phrases that are too weird - they are likely transcription mistakes. Make your summary broken into very short sentences. Do not write anything too weird:
 """
 
-
+PROMPT_PREFIX = """
+Summarize the following police conversation in short declarative sentences in the present tense. Mention only the crimes, activities, locations, and people involved:
+"""
 
 
 def get_summary(data):
