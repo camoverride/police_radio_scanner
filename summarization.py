@@ -12,7 +12,7 @@ Summarize the following police conversation in short declarative sentences in th
 """
 
 PROMPT_PREFIX = """
-Briefly summarize the events from the following police radio transcription. Use very short declarative sentences only: 
+Briefly summarize the events from the following police radio transcription. Use very short declarative sentences only. If there are parts of the transcription that are unintelligible, ignore them: 
 """
 
 
