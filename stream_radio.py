@@ -152,7 +152,7 @@ if __name__ == "__main__":
 
     while True:
         results = record_and_summarize(audio_stream_url="https://broadcastify.cdnstream1.com/31423",
-                             recording_duration=60, # 300s = 5min chunk to reduce calls to API 
+                             recording_duration=120, # 300s = 5min chunk to reduce calls to API 
                              database_conn=conn)
 
         # Write the s3 path to info.txt
