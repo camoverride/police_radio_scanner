@@ -8,7 +8,7 @@ Please summarize the following text. It is a transcription of a police radio con
 """
 
 
-def get_summary(prompt_prefix, data):
+def get_summary(data):
     """
     Feeds the prompt_prefix (which describes the task) and the recordings data
     to the OpenAI API to get a summarization.
@@ -23,7 +23,7 @@ def get_summary(prompt_prefix, data):
         messages=[
             {
                 "role": "user",
-                "content": f"{prompt_prefix}\n\n {data}",
+                "content": f"{PROMPT_PREFIX}\n\n {data}",
             }
         ],
         model="gpt-3.5-turbo",
