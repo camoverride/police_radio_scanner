@@ -12,3 +12,5 @@ recordings.db
 # Misc
 __tmp_audio.wav
 data.json
+.DS_Store
+police.pem
